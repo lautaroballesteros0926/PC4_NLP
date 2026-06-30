@@ -70,14 +70,14 @@ A continuación se detallan las métricas de recuperación evaluadas sobre un be
 
 | Estrategia | Chunks Creados | Tamaño Promedio (chars) | Recall@3 | MRR@3 | Recall@5 | MRR@5 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Fixed-Size Chunking (A)** | 16 | 362.88 | 0.60 | 0.33 | 0.80 | 0.37 |
-| **Recursive Character (B)** | 18 | 344.22 | 1.00 | 0.90 | 1.00 | 0.90 |
-| **Semantic Chunking (C)** | 8 | 708.38 | 0.80 | 0.50 | 1.00 | 0.54 |
+| **Fixed-Size Chunking (A)** | 18 | 348.44 | 0.80 | 0.50 | 1.00 | 0.54 |
+| **Recursive Character (B)** | 26 | 253.81 | 0.80 | 0.50 | 1.00 | 0.55 |
+| **Semantic Chunking (C)** | 7 | 897.71 | 1.00 | 0.90 | 1.00 | 0.90 |
 
 ### Análisis Cualitativo
-* **Fixed-Size:** Cortó explicaciones clave a la mitad (por ejemplo, dividiendo los datos del planeta de Miller entre dos chunks), lo que causó fallos de recuperación semántica (Recall@3 de 0.60).
-* **Recursive Character:** Logró un Recall perfecto de 1.0 para $k=3$. Al respetar los límites de los párrafos (`\n\n`), mantuvo intacto el contexto de cada explicación conceptual.
-* **Semantic:** Agrupó oraciones coherentemente por subtemas (Gargantua, Miller, el Teseracto). Logró Recall perfecto a $k=5$, mostrando que preserva el contexto de forma natural aunque genere menos chunks en promedio.
+* **Fixed-Size:** Realizó cortes lineales por caracteres, fragmentando algunas explicaciones conceptuales en la mitad (por ejemplo, dividiendo los datos del planeta de Miller entre dos chunks). Logró un Recall@3 de 0.80 y MRR@3 de 0.50.
+* **Recursive Character:** Aunque respeta los límites lógicos, el tamaño promedio pequeño de los chunks (~254 caracteres) limitó levemente la densidad semántica de la respuesta completa dentro del top-3, igualando el Recall@3 de 0.80 y obteniendo un MRR@3 de 0.50.
+* **Semantic:** Agrupó oraciones coherentemente por subtemas (Gargantua, Miller, el Teseracto). Logró un Recall@3 perfecto de 1.00 y un MRR@3 de 0.90, demostrando ser la estrategia más efectiva para mantener el contexto unificado y entregar respuestas completas.
 
 ---
 
